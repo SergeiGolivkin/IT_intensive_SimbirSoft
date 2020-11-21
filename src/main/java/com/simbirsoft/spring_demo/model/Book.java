@@ -16,13 +16,13 @@ public class Book {
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     private Author author;
 
-    @Column(name ="name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name ="genre")
+    @Column(name = "genre")
     private String genre;
 
-    @Column(name ="year_of_publishing")
+    @Column(name = "year_of_publishing")
     private LocalDate yearOfPublishing;
 
     public Long getId() {

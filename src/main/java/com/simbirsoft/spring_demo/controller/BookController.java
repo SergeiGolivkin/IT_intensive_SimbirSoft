@@ -18,13 +18,13 @@ public final class BookController {
     private BookService bookService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Book> findById(@PathVariable("id") Long id){
-        if (isEmpty(id)){
+    public ResponseEntity<Book> findById(@PathVariable("id") Long id) {
+        if (isEmpty(id)) {
             return ResponseEntity.badRequest().build();
         }
         Book book = bookService.findById(id);
 
-        if(isEmpty(book)){
+        if (isEmpty(book)) {
             return ResponseEntity.noContent().build();
         }
 
@@ -32,10 +32,9 @@ public final class BookController {
     }
 
 
-
     @PostMapping("/create")
-    public ResponseEntity<String> addBook(@RequestBody BookDto bookDto){
-        if(isEmpty(bookDto)){
+    public ResponseEntity<String> addBook(@RequestBody BookDto bookDto) {
+        if (isEmpty(bookDto)) {
             return ResponseEntity.badRequest().build();
         }
         bookService.save(bookDto);

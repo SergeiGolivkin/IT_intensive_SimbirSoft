@@ -19,7 +19,7 @@ public final class PublisherController {
     private PublisherService publisherService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Publisher> findById(@PathVariable("id") Long id){
+    public ResponseEntity<Publisher> findById(@PathVariable("id") Long id) {
         if (!isEmpty(id)) {
             Publisher publisher = publisherService.findById(id);
 
@@ -34,8 +34,8 @@ public final class PublisherController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> addPublisher(@RequestBody PublisherDto publisherDto){
-        if(isEmpty(publisherDto)){
+    public ResponseEntity<String> addPublisher(@RequestBody PublisherDto publisherDto) {
+        if (isEmpty(publisherDto)) {
             return ResponseEntity.badRequest().build();
         }
         publisherService.save(publisherDto);

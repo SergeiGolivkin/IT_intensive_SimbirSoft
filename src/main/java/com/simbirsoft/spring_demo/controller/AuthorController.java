@@ -18,13 +18,13 @@ public final class AuthorController {
     private AuthorService authorService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Author> findById(@PathVariable("id") Long id){
-        if (isEmpty(id)){
+    public ResponseEntity<Author> findById(@PathVariable("id") Long id) {
+        if (isEmpty(id)) {
             return ResponseEntity.badRequest().build();
         }
         Author author = authorService.findById(id);
 
-        if(isEmpty(author)){
+        if (isEmpty(author)) {
             return ResponseEntity.noContent().build();
         }
 
@@ -32,10 +32,9 @@ public final class AuthorController {
     }
 
 
-
     @PostMapping("/create")
-    public ResponseEntity<String> addAuthor(@RequestBody AuthorDto authorDto){
-        if(isEmpty(authorDto)){
+    public ResponseEntity<String> addAuthor(@RequestBody AuthorDto authorDto) {
+        if (isEmpty(authorDto)) {
             return ResponseEntity.badRequest().build();
         }
         authorService.save(authorDto);

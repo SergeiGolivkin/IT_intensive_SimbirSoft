@@ -11,13 +11,13 @@ public class Publisher {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name ="firstName")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name ="lastName")
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name ="company")
+    @Column(name = "company")
     private String company;
 
     public Long getId() {

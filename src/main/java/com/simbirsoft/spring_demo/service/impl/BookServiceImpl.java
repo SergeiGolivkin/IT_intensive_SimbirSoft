@@ -30,16 +30,15 @@ public class BookServiceImpl implements BookService {
     }
 
 
-
- @Override
+    @Override
     public void save(BookDto bookDto) {
         Book book = new Book();
-       book.setAuthor(authorService.findById(bookDto.getAuthorId()));
-       book.setName(bookDto.getName());
-      book.setGenre(bookDto.getGenre());
-      book.setYearOfPublishing(bookDto.getYearOfPublishing());
-      bookRepository.save(book);
+        book.setAuthor(authorService.findById(bookDto.getAuthorId()));
+        book.setName(bookDto.getName());
+        book.setGenre(bookDto.getGenre());
+        book.setYearOfPublishing(bookDto.getYearOfPublishing());
+        bookRepository.save(book);
 
 
     }
- }
+}

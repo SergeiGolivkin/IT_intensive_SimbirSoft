@@ -12,12 +12,12 @@ public class Author {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "publisher_id", referencedColumnName = "id")
-    private Publisher publisher ;
+    private Publisher publisher;
 
-    @Column(name ="first_name")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name ="last_name")
+    @Column(name = "last_name")
     private String lastName;
 
     public Long getId() {

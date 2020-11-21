@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static org.apache.logging.log4j.ThreadContext.isEmpty;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @RestController
 @RequestMapping("/api/v1/author")
@@ -19,12 +19,12 @@ public class AuthorController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Author> findById(@PathVariable("id") Long id){
-        if (isEmpty()){
+        if (isEmpty(id)){
             return ResponseEntity.badRequest().build();
         }
         Author author = authorService.findById(id);
 
-        if(isEmpty()){
+        if(isEmpty(author)){
             return ResponseEntity.noContent().build();
         }
 
@@ -35,7 +35,7 @@ public class AuthorController {
 
     @PostMapping("/create")
     public ResponseEntity<String> addAuthor(@RequestBody AuthorDto authorDto){
-        if(isEmpty()){
+        if(isEmpty(authorDto)){
             return ResponseEntity.badRequest().build();
         }
         authorService.save(authorDto);
@@ -46,7 +46,7 @@ public class AuthorController {
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         Author author = authorService.findById(id);
 
-        if (isEmpty()) {
+        if (isEmpty(author)) {
             return ResponseEntity.notFound().build();
         }
         authorService.delete(id);

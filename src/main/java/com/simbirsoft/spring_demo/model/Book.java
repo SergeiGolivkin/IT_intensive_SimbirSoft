@@ -2,6 +2,7 @@ package com.simbirsoft.spring_demo.model;
 
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "book")
@@ -12,7 +13,7 @@ public class Book {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "authorId", referencedColumnName = "id")
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
     private Author author;
 
     @Column(name ="name")
@@ -21,8 +22,8 @@ public class Book {
     @Column(name ="genre")
     private String genre;
 
-    @Column(name ="yearOfPublishing")
-    private Integer yearOfPublishing;
+    @Column(name ="year_of_publishing")
+    private LocalDate yearOfPublishing;
 
     public Long getId() {
         return id;
@@ -56,11 +57,11 @@ public class Book {
         this.genre = genre;
     }
 
-    public Integer getYearOfPublishing() {
+    public LocalDate getYearOfPublishing() {
         return yearOfPublishing;
     }
 
-    public void setYearOfPublishing(Integer yearOfPublishing) {
+    public void setYearOfPublishing(LocalDate yearOfPublishing) {
         this.yearOfPublishing = yearOfPublishing;
     }
 }

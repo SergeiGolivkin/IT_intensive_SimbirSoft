@@ -11,13 +11,13 @@ public class Author {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "publisherId", referencedColumnName = "id")
+    @JoinColumn(name = "publisher_id", referencedColumnName = "id")
     private Publisher publisher ;
 
-    @Column(name ="firstName")
+    @Column(name ="first_name")
     private String firstName;
 
-    @Column(name ="lastName")
+    @Column(name ="last_name")
     private String lastName;
 
     public Long getId() {

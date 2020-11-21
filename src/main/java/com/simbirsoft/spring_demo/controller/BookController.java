@@ -8,23 +8,23 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static org.apache.logging.log4j.ThreadContext.isEmpty;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @RestController
 @RequestMapping("/api/v1/book")
-public class BookController {
+public final class BookController {
 
     @Autowired
     private BookService bookService;
 
     @GetMapping("/{id}")
     public ResponseEntity<Book> findById(@PathVariable("id") Long id){
-        if (isEmpty()){
+        if (isEmpty(id)){
             return ResponseEntity.badRequest().build();
         }
         Book book = bookService.findById(id);
 
-        if(isEmpty()){
+        if(isEmpty(book)){
             return ResponseEntity.noContent().build();
         }
 
@@ -35,7 +35,7 @@ public class BookController {
 
     @PostMapping("/create")
     public ResponseEntity<String> addBook(@RequestBody BookDto bookDto){
-        if(isEmpty()){
+        if(isEmpty(bookDto)){
             return ResponseEntity.badRequest().build();
         }
         bookService.save(bookDto);
@@ -46,7 +46,7 @@ public class BookController {
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         Book book = bookService.findById(id);
 
-        if (isEmpty()) {
+        if (isEmpty(book)) {
             return ResponseEntity.notFound().build();
         }
         bookService.delete(id);

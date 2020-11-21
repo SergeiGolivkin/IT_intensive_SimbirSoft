@@ -1,12 +1,14 @@
 package com.simbirsoft.spring_demo.dto;
 
 
+import java.time.LocalDate;
+
 public class BookDto {
 
     private Long authorId;
     private String name;
     private String genre;
-    private Integer yearOfPublishing;
+    private LocalDate yearOfPublishing;
 
     public Long getAuthorId() {
         return authorId;
@@ -32,11 +34,11 @@ public class BookDto {
         this.genre = genre;
     }
 
-    public Integer getYearOfPublishing() {
+    public LocalDate getYearOfPublishing() {
         return yearOfPublishing;
     }
 
-    public void setYearOfPublishing(Integer yearOfPublishing) {
+    public void setYearOfPublishing(LocalDate yearOfPublishing) {
         this.yearOfPublishing = yearOfPublishing;
     }
 }

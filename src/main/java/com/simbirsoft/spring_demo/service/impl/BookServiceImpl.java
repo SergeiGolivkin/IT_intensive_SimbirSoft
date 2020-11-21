@@ -2,7 +2,6 @@ package com.simbirsoft.spring_demo.service.impl;
 
 import com.simbirsoft.spring_demo.dto.BookDto;
 import com.simbirsoft.spring_demo.model.Book;
-import com.simbirsoft.spring_demo.repository.AuthorRepository;
 import com.simbirsoft.spring_demo.repository.BookRepository;
 import com.simbirsoft.spring_demo.service.AuthorService;
 import com.simbirsoft.spring_demo.service.BookService;
@@ -43,4 +42,4 @@ public class BookServiceImpl implements BookService {
 
 
     }
-}
+ }

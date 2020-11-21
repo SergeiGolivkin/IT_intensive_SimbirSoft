@@ -40,6 +40,5 @@ public class AuthorServiceImpl implements AuthorService {
         authorRepository.save(author);
 
     }
-
-    }
+}
 

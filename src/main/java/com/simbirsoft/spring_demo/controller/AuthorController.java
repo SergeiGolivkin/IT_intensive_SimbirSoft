@@ -12,7 +12,7 @@ import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @RestController
 @RequestMapping("/api/v1/author")
-public class AuthorController {
+public final class AuthorController {
 
     @Autowired
     private AuthorService authorService;

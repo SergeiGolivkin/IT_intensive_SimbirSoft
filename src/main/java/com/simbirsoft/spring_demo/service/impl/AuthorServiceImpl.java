@@ -18,7 +18,6 @@ public class AuthorServiceImpl implements AuthorService {
     @Autowired
     private PublisherService publisherService;
 
-
     @Override
     public Author findById(Long id) {
         return authorRepository.findById(id).orElse(null);

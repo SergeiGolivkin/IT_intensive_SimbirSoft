@@ -12,10 +12,14 @@ import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @RestController
 @RequestMapping("/api/v1/book")
-public final class BookController {
+public class BookController {
 
     @Autowired
-    private BookService bookService;
+    private final BookService bookService;
+
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Book> findById(@PathVariable("id") Long id) {

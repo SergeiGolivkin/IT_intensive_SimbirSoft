@@ -12,10 +12,14 @@ import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @RestController
 @RequestMapping("/api/v1/author")
-public final class AuthorController {
+public class AuthorController {
 
     @Autowired
-    private AuthorService authorService;
+    private final AuthorService authorService;
+
+    public AuthorController(AuthorService authorService) {
+        this.authorService = authorService;
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Author> findById(@PathVariable("id") Long id) {

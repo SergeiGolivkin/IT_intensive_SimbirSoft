@@ -13,10 +13,14 @@ import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @RestController
 @RequestMapping("/api/v1/publisher")
-public final class PublisherController {
+public class PublisherController {
 
     @Autowired
-    private PublisherService publisherService;
+    private final   PublisherService publisherService;
+
+    public PublisherController(PublisherService publisherService) {
+        this.publisherService = publisherService;
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Publisher> findById(@PathVariable("id") Long id) {

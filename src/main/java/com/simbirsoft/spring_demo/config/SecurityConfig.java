@@ -40,12 +40,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/v1/**").hasAnyAuthority(Permission.AUTHOR_READ.getPermission(),
-                Permission.BOOK_READ.getPermission(), Permission.PUBLISHER_READ.getPermission())
-                .antMatchers(HttpMethod.POST, "/api/v1/**").hasAnyAuthority(Permission.AUTHOR_WRITE.getPermission(),
-                Permission.BOOK_WRITE.getPermission(), Permission.PUBLISHER_WRITE.getPermission())
-                .antMatchers(HttpMethod.DELETE, "/api/v1/**").hasAnyAuthority(Permission.AUTHOR_WRITE.getPermission(),
-                Permission.BOOK_WRITE.getPermission(), Permission.PUBLISHER_WRITE.getPermission())
                 .anyRequest()
                 .authenticated()
                 .and()

@@ -8,6 +8,8 @@ import com.simbirsoft.spring_demo.service.PublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
@@ -17,6 +19,11 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Autowired
     private PublisherService publisherService;
+
+    @Override
+    public List<Author> getAll() {
+        return authorRepository.findAll();
+    }
 
     @Override
     public Author findById(Long id) {

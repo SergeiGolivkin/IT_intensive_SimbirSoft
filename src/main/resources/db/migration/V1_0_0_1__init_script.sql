@@ -1,4 +1,4 @@
-CREATE SEQUENCE IF NOT EXISTS hibernate_sequence start 1000 increment 1;
+CREATE SEQUENCE IF NOT EXISTS hibernate_sequence start 1 increment 1;
 
 
 

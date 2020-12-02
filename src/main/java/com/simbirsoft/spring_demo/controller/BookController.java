@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @RestController
@@ -21,6 +20,7 @@ public class BookController {
     public BookController(BookService bookService) {
         this.bookService = bookService;
     }
+
 
     @PreAuthorize("hasAnyAuthority('book:read')")
     @GetMapping("/{id}")
@@ -36,6 +36,7 @@ public class BookController {
 
         return ResponseEntity.ok(book);
     }
+
 
 
     @PreAuthorize("hasAnyAuthority('book:write')")

@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @RestController
@@ -22,6 +21,7 @@ public class PublisherController {
     public PublisherController(PublisherService publisherService) {
         this.publisherService = publisherService;
     }
+
 
     @PreAuthorize("hasAnyAuthority('publisher:read')")
     @GetMapping("/{id}")
@@ -40,6 +40,7 @@ public class PublisherController {
     }
 
     @PreAuthorize("hasAnyAuthority('publisher:write')")
+
     @PostMapping("/create")
     public ResponseEntity<String> addPublisher(@RequestBody PublisherDto publisherDto) {
         if (isEmpty(publisherDto)) {

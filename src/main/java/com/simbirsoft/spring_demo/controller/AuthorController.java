@@ -8,9 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
+import org.springframework.web.bind.annotation.*;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @RestController
@@ -23,6 +22,7 @@ public class AuthorController {
     public AuthorController(AuthorService authorService) {
         this.authorService = authorService;
     }
+
 
     @GetMapping
     @PreAuthorize("hasAuthority('author:read')")
@@ -45,6 +45,7 @@ public class AuthorController {
         return ResponseEntity.ok(author);
     }
 
+
     @PreAuthorize("hasAnyAuthority('author:write')")
     @PostMapping("/create")
     public ResponseEntity<String> addAuthor(@RequestBody AuthorDto authorDto) {
@@ -54,6 +55,7 @@ public class AuthorController {
         authorService.save(authorDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
 
     @PreAuthorize("hasAnyAuthority('author:write')")
     @DeleteMapping("/{id}")

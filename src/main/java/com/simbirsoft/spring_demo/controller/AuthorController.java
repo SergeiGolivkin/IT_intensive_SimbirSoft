@@ -24,6 +24,7 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
+
     @GetMapping
     @PreAuthorize("hasAuthority('author:read')")
     public ResponseEntity<List<Author>> getAll() {
@@ -45,6 +46,7 @@ public class AuthorController {
         return ResponseEntity.ok(author);
     }
 
+
     @PreAuthorize("hasAnyAuthority('author:write')")
     @PostMapping("/create")
     public ResponseEntity<String> addAuthor(@RequestBody AuthorDto authorDto) {
@@ -54,6 +56,7 @@ public class AuthorController {
         authorService.save(authorDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
 
     @PreAuthorize("hasAnyAuthority('author:write')")
     @DeleteMapping("/{id}")

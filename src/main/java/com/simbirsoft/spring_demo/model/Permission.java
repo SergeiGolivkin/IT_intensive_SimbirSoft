@@ -6,7 +6,9 @@ public enum Permission {
     BOOK_READ("book:read"),
     BOOK_WRITE("book:write"),
     PUBLISHER_READ("publisher:read"),
-    PUBLISHER_WRITE("publisher:write");
+    PUBLISHER_WRITE("publisher:write"),
+    USER_READ("user:read"),
+    USER_WRITE("user:write");
 
     private final String permission;
 

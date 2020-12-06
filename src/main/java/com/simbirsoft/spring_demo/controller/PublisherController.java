@@ -9,9 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+<<<<<<< HEAD
 
 import java.util.List;
 
+=======
+>>>>>>> 5f60ab5dc75e297a3b33e0c73cda03fb0c78f0bf
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @RestController
@@ -25,11 +28,14 @@ public class PublisherController {
         this.publisherService = publisherService;
     }
 
+<<<<<<< HEAD
     @GetMapping
     @PreAuthorize("hasAuthority('publisher:read')")
     public ResponseEntity<List<Publisher>> getAll() {
         return ResponseEntity.ok(publisherService.getAll());
     }
+=======
+>>>>>>> 5f60ab5dc75e297a3b33e0c73cda03fb0c78f0bf
 
     @PreAuthorize("hasAnyAuthority('publisher:read')")
     @GetMapping("/{id}")
@@ -47,8 +53,13 @@ public class PublisherController {
         }
     }
 
+<<<<<<< HEAD
 
     @PreAuthorize("hasAnyAuthority('publisher:write')")
+=======
+    @PreAuthorize("hasAnyAuthority('publisher:write')")
+
+>>>>>>> 5f60ab5dc75e297a3b33e0c73cda03fb0c78f0bf
     @PostMapping("/create")
     public ResponseEntity<String> addPublisher(@RequestBody PublisherDto publisherDto) {
         if (isEmpty(publisherDto)) {
@@ -58,7 +69,10 @@ public class PublisherController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5f60ab5dc75e297a3b33e0c73cda03fb0c78f0bf
     @PreAuthorize("hasAnyAuthority('publisher:write')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {

@@ -8,12 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
-<<<<<<< HEAD
 
-=======
-import org.springframework.web.bind.annotation.*;
->>>>>>> 5f60ab5dc75e297a3b33e0c73cda03fb0c78f0bf
+import java.util.List;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @RestController

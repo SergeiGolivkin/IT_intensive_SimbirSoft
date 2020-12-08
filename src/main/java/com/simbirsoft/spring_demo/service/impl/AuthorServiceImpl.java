@@ -7,13 +7,8 @@ import com.simbirsoft.spring_demo.service.AuthorService;
 import com.simbirsoft.spring_demo.service.PublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 5f60ab5dc75e297a3b33e0c73cda03fb0c78f0bf
 @Service
 public class AuthorServiceImpl implements AuthorService {
 

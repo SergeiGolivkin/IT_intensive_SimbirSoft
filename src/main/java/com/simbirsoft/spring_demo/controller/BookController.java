@@ -3,25 +3,21 @@ package com.simbirsoft.spring_demo.controller;
 import com.simbirsoft.spring_demo.dto.BookDto;
 import com.simbirsoft.spring_demo.model.Book;
 import com.simbirsoft.spring_demo.service.BookService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1/book")
 public class BookController {
 
-    @Autowired
     private final BookService bookService;
-
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
-    }
 
     @GetMapping
     @PreAuthorize("hasAuthority('book:read')")

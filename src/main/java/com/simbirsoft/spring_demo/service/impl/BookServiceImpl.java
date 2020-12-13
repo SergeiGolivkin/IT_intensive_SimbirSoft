@@ -1,6 +1,7 @@
 package com.simbirsoft.spring_demo.service.impl;
 
 import com.simbirsoft.spring_demo.dto.BookDto;
+import com.simbirsoft.spring_demo.mapper.BookMapper;
 import com.simbirsoft.spring_demo.model.Book;
 import com.simbirsoft.spring_demo.repository.BookRepository;
 import com.simbirsoft.spring_demo.service.AuthorService;
@@ -20,6 +21,9 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private AuthorService authorService;
 
+    @Autowired
+    private BookMapper bookMapper;
+
     @Override
     public List<Book> getAll() {
         return bookRepository.findAll();
@@ -36,16 +40,9 @@ public class BookServiceImpl implements BookService {
 
     }
 
-
     @Override
     public void save(BookDto bookDto) {
-        Book book = new Book();
-        book.setAuthor(authorService.findById(bookDto.getAuthorId()));
-        book.setName(bookDto.getName());
-        book.setGenre(bookDto.getGenre());
-        book.setYearOfPublishing(bookDto.getYearOfPublishing());
-        bookRepository.save(book);
-
+        bookRepository.save(bookMapper.toBook(bookDto));
 
     }
 }

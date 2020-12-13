@@ -3,26 +3,21 @@ package com.simbirsoft.spring_demo.controller;
 import com.simbirsoft.spring_demo.dto.AuthorDto;
 import com.simbirsoft.spring_demo.model.Author;
 import com.simbirsoft.spring_demo.service.AuthorService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1/author")
 public class AuthorController {
 
-    @Autowired
     private final AuthorService authorService;
-
-    public AuthorController(AuthorService authorService) {
-        this.authorService = authorService;
-    }
-
 
     @GetMapping
     @PreAuthorize("hasAuthority('author:read')")

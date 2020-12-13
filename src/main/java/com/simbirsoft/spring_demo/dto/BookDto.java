@@ -1,8 +1,10 @@
 package com.simbirsoft.spring_demo.dto;
 
+import lombok.Data;
 
 import java.time.LocalDate;
 
+@Data
 public class BookDto {
 
     private Long authorId;
@@ -10,35 +12,4 @@ public class BookDto {
     private String genre;
     private LocalDate yearOfPublishing;
 
-    public Long getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public LocalDate getYearOfPublishing() {
-        return yearOfPublishing;
-    }
-
-    public void setYearOfPublishing(LocalDate yearOfPublishing) {
-        this.yearOfPublishing = yearOfPublishing;
-    }
 }

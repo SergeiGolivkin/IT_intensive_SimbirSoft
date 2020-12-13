@@ -1,6 +1,7 @@
 package com.simbirsoft.spring_demo.service.impl;
 
 import com.simbirsoft.spring_demo.dto.UserDto;
+import com.simbirsoft.spring_demo.mapper.UserMapper;
 import com.simbirsoft.spring_demo.model.User;
 import com.simbirsoft.spring_demo.repository.UserRepository;
 import com.simbirsoft.spring_demo.service.UserService;
@@ -13,7 +14,10 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private  UserRepository userRepository;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public List<User> getAll() {
@@ -32,13 +36,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(UserDto userDto) {
-        User user = new User();
-        user.setEmail(userDto.getEmail());
-        user.setPassword(user.getPassword());
-        user.setFirstName(user.getFirstName());
-        user.setLastName(user.getLastName());
-        user.setRole(user.getRole());
-        user.setStatus(user.getStatus());
-        userRepository.save(user);
+        userRepository.save(userMapper.toUser(userDto));
     }
 }

@@ -1,13 +1,16 @@
 package com.simbirsoft.spring_demo.service.impl;
 
 import com.simbirsoft.spring_demo.dto.AuthorDto;
+import com.simbirsoft.spring_demo.mapper.AuthorMapper;
 import com.simbirsoft.spring_demo.model.Author;
 import com.simbirsoft.spring_demo.repository.AuthorRepository;
 import com.simbirsoft.spring_demo.service.AuthorService;
 import com.simbirsoft.spring_demo.service.PublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
@@ -16,7 +19,10 @@ public class AuthorServiceImpl implements AuthorService {
     private AuthorRepository authorRepository;
 
     @Autowired
-    private PublisherService publisherService;
+    private  PublisherService publisherService;
+
+    @Autowired
+    private  AuthorMapper authorMapper;
 
     @Override
     public List<Author> getAll() {
@@ -36,11 +42,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void save(AuthorDto authorDto) {
-        Author author = new Author();
-        author.setPublisher(publisherService.findById(authorDto.getPublisherId()));
-        author.setFirstName(authorDto.getFirstName());
-        author.setLastName(authorDto.getLastName());
-        authorRepository.save(author);
+        authorRepository.save(authorMapper.toAuthor(authorDto));
 
     }
 }

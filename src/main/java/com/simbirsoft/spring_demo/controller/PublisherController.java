@@ -4,24 +4,21 @@ package com.simbirsoft.spring_demo.controller;
 import com.simbirsoft.spring_demo.dto.PublisherDto;
 import com.simbirsoft.spring_demo.model.Publisher;
 import com.simbirsoft.spring_demo.service.PublisherService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1/publisher")
 public class PublisherController {
 
-    @Autowired
     private final PublisherService publisherService;
-
-    public PublisherController(PublisherService publisherService) {
-        this.publisherService = publisherService;
-    }
 
     @GetMapping
     @PreAuthorize("hasAuthority('publisher:read')")

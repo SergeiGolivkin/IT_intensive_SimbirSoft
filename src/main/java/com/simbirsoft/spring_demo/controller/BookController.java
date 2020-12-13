@@ -6,8 +6,10 @@ import com.simbirsoft.spring_demo.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @RestController
@@ -21,6 +23,14 @@ public class BookController {
         this.bookService = bookService;
     }
 
+    @GetMapping
+    @PreAuthorize("hasAuthority('book:read')")
+    public ResponseEntity<List<Book>> getAll() {
+        return ResponseEntity.ok(bookService.getAll());
+    }
+
+
+    @PreAuthorize("hasAnyAuthority('book:read')")
     @GetMapping("/{id}")
     public ResponseEntity<Book> findById(@PathVariable("id") Long id) {
         if (isEmpty(id)) {
@@ -35,7 +45,7 @@ public class BookController {
         return ResponseEntity.ok(book);
     }
 
-
+    @PreAuthorize("hasAnyAuthority('book:write')")
     @PostMapping("/create")
     public ResponseEntity<String> addBook(@RequestBody BookDto bookDto) {
         if (isEmpty(bookDto)) {
@@ -45,6 +55,7 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @PreAuthorize("hasAnyAuthority('book:write')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         Book book = bookService.findById(id);

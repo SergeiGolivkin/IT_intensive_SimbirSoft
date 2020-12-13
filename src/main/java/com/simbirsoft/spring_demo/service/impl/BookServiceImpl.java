@@ -8,6 +8,8 @@ import com.simbirsoft.spring_demo.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BookServiceImpl implements BookService {
 
@@ -17,6 +19,11 @@ public class BookServiceImpl implements BookService {
 
     @Autowired
     private AuthorService authorService;
+
+    @Override
+    public List<Book> getAll() {
+        return bookRepository.findAll();
+    }
 
     @Override
     public Book findById(Long id) {

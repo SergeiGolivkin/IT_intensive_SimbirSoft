@@ -6,8 +6,10 @@ import com.simbirsoft.spring_demo.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @RestController
@@ -21,6 +23,14 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
+
+    @GetMapping
+    @PreAuthorize("hasAuthority('author:read')")
+    public ResponseEntity<List<Author>> getAll() {
+        return ResponseEntity.ok(authorService.getAll());
+    }
+
+    @PreAuthorize("hasAnyAuthority('author:read')")
     @GetMapping("/{id}")
     public ResponseEntity<Author> findById(@PathVariable("id") Long id) {
         if (isEmpty(id)) {
@@ -36,6 +46,7 @@ public class AuthorController {
     }
 
 
+    @PreAuthorize("hasAnyAuthority('author:write')")
     @PostMapping("/create")
     public ResponseEntity<String> addAuthor(@RequestBody AuthorDto authorDto) {
         if (isEmpty(authorDto)) {
@@ -45,6 +56,8 @@ public class AuthorController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+
+    @PreAuthorize("hasAnyAuthority('author:write')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         Author author = authorService.findById(id);

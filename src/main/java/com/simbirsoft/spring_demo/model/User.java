@@ -1,7 +1,7 @@
 package com.simbirsoft.spring_demo.model;
 
-import lombok.Data;
 
+import lombok.Data;
 import javax.persistence.*;
 
 @Data
@@ -32,5 +32,5 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status")
     private Status status;
-    
+
 }

@@ -2,6 +2,7 @@ package com.simbirsoft.spring_demo.service.impl;
 
 import com.simbirsoft.spring_demo.dto.PublisherDto;
 import com.simbirsoft.spring_demo.mapper.PublisherMapper;
+import com.simbirsoft.spring_demo.model.Author;
 import com.simbirsoft.spring_demo.model.Publisher;
 import com.simbirsoft.spring_demo.repository.PublisherRepository;
 import com.simbirsoft.spring_demo.service.PublisherService;
@@ -18,6 +19,11 @@ public class PublisherServiceImpl implements PublisherService {
 
     @Autowired
     private PublisherMapper publisherMapper;
+
+    @Override
+    public List<Publisher> getAll() {
+        return publisherRepository.findAll();
+    }
 
     @Override
     public List<Publisher> getAll() {

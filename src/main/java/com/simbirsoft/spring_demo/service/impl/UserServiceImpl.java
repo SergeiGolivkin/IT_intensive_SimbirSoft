@@ -19,6 +19,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+
     @Override
     public List<User> getAll() {
         return userRepository.findAll();
@@ -37,5 +38,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(UserDto userDto) {
         userRepository.save(userMapper.toUser(userDto));
+
     }
 }

@@ -30,7 +30,6 @@ public class PublisherController {
         return ResponseEntity.ok(publisherService.getAll());
     }
 
-
     @PreAuthorize("hasAnyAuthority('publisher:read')")
     @GetMapping("/{id}")
     @ApiOperation(value = "show publisher by ID")

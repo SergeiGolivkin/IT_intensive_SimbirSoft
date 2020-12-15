@@ -12,7 +12,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @AllArgsConstructor
@@ -29,6 +28,7 @@ public class AuthorController {
     public ResponseEntity<List<Author>> getAll() {
         return ResponseEntity.ok(authorService.getAll());
     }
+
 
     @PreAuthorize("hasAnyAuthority('author:read')")
     @GetMapping("/{id}")

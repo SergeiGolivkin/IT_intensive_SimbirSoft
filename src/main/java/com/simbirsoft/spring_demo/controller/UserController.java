@@ -4,6 +4,8 @@ package com.simbirsoft.spring_demo.controller;
 import com.simbirsoft.spring_demo.dto.UserDto;
 import com.simbirsoft.spring_demo.model.User;
 import com.simbirsoft.spring_demo.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,18 +18,21 @@ import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1/user")
+@Api(value = "User Service", description = "User table")
 public class UserController {
 
     private final UserService userService;
 
     @GetMapping
     @PreAuthorize("hasAuthority('user:read')")
+    @ApiOperation(value = "show all users")
     public ResponseEntity<List<User>> getAll() {
         return ResponseEntity.ok(userService.getAll());
     }
 
     @PreAuthorize("hasAnyAuthority('user:read')")
     @GetMapping("/{id}")
+    @ApiOperation(value = "show user by ID")
     public ResponseEntity<User> findById(@PathVariable("id") Long id) {
         if (!isEmpty(id)) {
             User user = userService.findById(id);
@@ -45,6 +50,7 @@ public class UserController {
 
     @PreAuthorize("hasAnyAuthority('user:write')")
     @PostMapping("/create")
+    @ApiOperation(value = "create a new user")
     public ResponseEntity<String> addUser(@RequestBody UserDto userDto) {
         if (isEmpty(userDto)) {
             return ResponseEntity.badRequest().build();
@@ -56,6 +62,7 @@ public class UserController {
 
     @PreAuthorize("hasAnyAuthority('user:write')")
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "delete user by ID")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         User user = userService.findById(id);
 

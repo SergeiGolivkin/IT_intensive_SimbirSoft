@@ -19,4 +19,4 @@ VALUES ('ivan@mail.ru', 'ivan', 'ivanov', '$2y$12$Vn/.SWraLgHwgIsBFtTgXuvP9xrgJC
         'ACTIVE');
 
 INSERT INTO Users (email, first_name, last_name, password, role, status)
-VALUES ('petr@mail.ru', 'petr', 'petrov', '$2y$12$oh1ldnTSSUKWZcMrgl7nROWnCvGNyC8cC9dLJhYEGneKdj7CV2krK ', 'ADMIN', 'ACTIVE');
+VALUES ('petr@mail.ru', 'petr', 'petrov', '$2y$12$b1kzjhsC/INxXiy6M4bonuMTlKjx6s2P/3F1YKRSFLaw3CAVsHQ6W', 'ADMIN', 'ACTIVE');

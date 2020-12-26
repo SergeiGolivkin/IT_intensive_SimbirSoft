@@ -1,5 +1,11 @@
 package com.simbirsoft.spring_demo.model;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
 public enum Permission {
     AUTHOR_READ("author:read"),
     AUTHOR_WRITE("author:write"),
@@ -11,15 +17,5 @@ public enum Permission {
     USER_WRITE("user:write");
 
     private final String permission;
-
-
-    Permission(String permission) {
-        this.permission = permission;
-    }
-
-
-    public String getPermission() {
-        return permission;
-    }
 
 }

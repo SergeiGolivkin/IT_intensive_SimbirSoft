@@ -11,9 +11,10 @@ public enum Role {
             Permission.AUTHOR_WRITE, Permission.BOOK_WRITE, Permission.PUBLISHER_WRITE,
             Permission.USER_READ, Permission.USER_WRITE));
 
-
     private final Set<Permission> permissions;
 
+    private final Set<Permission> permissions;
+  
     Role(Set<Permission> permissions) {
         this.permissions = permissions;
     }

@@ -1,5 +1,6 @@
 package com.simbirsoft.spring_demo.mapper;
 
+
 import com.simbirsoft.spring_demo.dto.request.CreateUserRequest;
 import com.simbirsoft.spring_demo.dto.response.UserResponse;
 import com.simbirsoft.spring_demo.model.User;
@@ -13,6 +14,7 @@ public interface UserMapper {
     @Mappings({
             @Mapping(target = "password", ignore = true)
     })
+
     User toUser(CreateUserRequest createUserRequest);
 
     UserResponse toUserResponse(User user);

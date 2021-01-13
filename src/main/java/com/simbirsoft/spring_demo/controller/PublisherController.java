@@ -34,4 +34,5 @@ public interface PublisherController {
     @DeleteMapping(PUBLISHER_ID_PATH_VARIABLE)
     @ApiOperation(value = "delete publisher by ID")
     ResponseEntity<String> delete(@PathVariable("id") Long id);
+
 }

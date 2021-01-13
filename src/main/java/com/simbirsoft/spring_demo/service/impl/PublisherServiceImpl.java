@@ -1,6 +1,5 @@
 package com.simbirsoft.spring_demo.service.impl;
 
-
 import com.simbirsoft.spring_demo.exception.PublisherNotFoundException;
 import com.simbirsoft.spring_demo.model.Publisher;
 import com.simbirsoft.spring_demo.repository.PublisherRepository;
@@ -17,7 +16,7 @@ import java.util.List;
 public class PublisherServiceImpl implements PublisherService {
 
     private PublisherRepository publisherRepository;
-
+  
     @Transactional(readOnly = true)
     @Override
     public List<Publisher> getAll() {
@@ -42,7 +41,6 @@ public class PublisherServiceImpl implements PublisherService {
 
     @Override
     public Publisher save(Publisher publisher) {
-
         Assert.notNull(publisher, "Publisher dto object should not be null");
         return publisherRepository.save(publisher);
     }

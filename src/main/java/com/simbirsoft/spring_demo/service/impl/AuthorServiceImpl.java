@@ -1,5 +1,6 @@
 package com.simbirsoft.spring_demo.service.impl;
 
+
 import com.simbirsoft.spring_demo.exception.AuthorNotFoundException;
 import com.simbirsoft.spring_demo.model.Author;
 import com.simbirsoft.spring_demo.repository.AuthorRepository;
@@ -8,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-
 import java.util.List;
 
 
@@ -44,7 +44,6 @@ public class AuthorServiceImpl implements AuthorService {
     public Author save(Author author) {
         Assert.notNull(author, "Author dto object should not be null");
         return authorRepository.save(author);
-
     }
 }
 

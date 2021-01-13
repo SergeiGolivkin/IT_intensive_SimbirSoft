@@ -43,9 +43,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
-
         Assert.notNull(user, "User dto object should not be null");
         return userRepository.save(user);
-
     }
 }

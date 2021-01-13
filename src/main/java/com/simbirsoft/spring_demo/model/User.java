@@ -2,7 +2,6 @@ package com.simbirsoft.spring_demo.model;
 
 
 import lombok.Data;
-
 import javax.persistence.*;
 
 @Data

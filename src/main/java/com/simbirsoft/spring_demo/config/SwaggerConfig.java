@@ -21,6 +21,7 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("com.simbirsoft.spring_demo.controller"))
                 .paths(PathSelectors.any())
                 .build();
+
     }
 
 }

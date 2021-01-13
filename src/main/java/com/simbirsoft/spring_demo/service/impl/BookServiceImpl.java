@@ -1,5 +1,6 @@
 package com.simbirsoft.spring_demo.service.impl;
 
+
 import com.simbirsoft.spring_demo.exception.BookNotFoundException;
 import com.simbirsoft.spring_demo.model.Book;
 import com.simbirsoft.spring_demo.repository.BookRepository;
@@ -41,7 +42,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book save(Book book) {
-
         Assert.notNull(book, "Book dto object should not be null");
         return bookRepository.save(book);
     }

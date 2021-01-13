@@ -7,7 +7,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -34,4 +33,5 @@ public interface UserController {
     @DeleteMapping(USER_ID_PATH_VARIABLE)
     @ApiOperation(value = "delete user by ID")
     ResponseEntity<String> delete(@PathVariable("id") Long id);
+
 }

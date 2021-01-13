@@ -41,8 +41,7 @@ public class UserControllerImpl implements UserController {
         if (isEmpty(id)) {
             return ResponseEntity.badRequest().build();
         }
-        User user  = userService.findById(id);
-
+        User user = userService.findById(id);
 
 
         return ResponseEntity
@@ -71,8 +70,5 @@ public class UserControllerImpl implements UserController {
         }
         userService.delete(id);
         return ResponseEntity.ok().build();
-
     }
-
-
 }

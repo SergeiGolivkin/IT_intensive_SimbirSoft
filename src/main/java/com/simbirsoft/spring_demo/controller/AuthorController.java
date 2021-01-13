@@ -13,12 +13,14 @@ import java.util.List;
 
 public interface AuthorController {
 
+
     String AUTHOR_ID_PATH_VARIABLE = "/{id}";
 
     @GetMapping
     @PreAuthorize("hasAuthority('author:read')")
     @ApiOperation(value = "show all authors")
     ResponseEntity<List<Author>> getAll();
+
 
     @PreAuthorize("hasAnyAuthority('author:read')")
     @GetMapping(AUTHOR_ID_PATH_VARIABLE)

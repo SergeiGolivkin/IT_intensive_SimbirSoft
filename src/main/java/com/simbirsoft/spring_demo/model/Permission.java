@@ -1,5 +1,6 @@
 package com.simbirsoft.spring_demo.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

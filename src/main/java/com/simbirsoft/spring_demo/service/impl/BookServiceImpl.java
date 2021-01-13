@@ -23,17 +23,16 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
     @Override
     public Book findById(Long id) {
-        Assert.notNull(id,"Book id should not be null");
+        Assert.notNull(id, "Book id should not be null");
         return bookRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException(id));
     }
 
     @Override
     public void delete(Long id) {
-        Assert.notNull(id,"Book id should not be null");
+        Assert.notNull(id, "Book id should not be null");
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException(id));
         bookRepository.delete(book);
@@ -43,7 +42,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book save(Book book) {
 
-        Assert.notNull(book,"Book dto object should not be null");
+        Assert.notNull(book, "Book dto object should not be null");
         return bookRepository.save(book);
     }
 }

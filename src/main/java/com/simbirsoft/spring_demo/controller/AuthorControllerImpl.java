@@ -42,7 +42,6 @@ public class AuthorControllerImpl implements AuthorController {
         Author author = authorService.findById(id);
 
 
-
         return ResponseEntity
                 .ok(authorMapper.toAuthorResponse(
                         authorService.findById(id)));

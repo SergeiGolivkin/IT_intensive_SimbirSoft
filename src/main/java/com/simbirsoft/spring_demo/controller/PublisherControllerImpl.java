@@ -44,7 +44,6 @@ public class PublisherControllerImpl implements PublisherController {
         Publisher publisher = publisherService.findById(id);
 
 
-
         return ResponseEntity
                 .ok(publisherMapper.toPublisherResponse(
                         publisherService.findById(id)));
@@ -64,7 +63,7 @@ public class PublisherControllerImpl implements PublisherController {
 
     @Override
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
-       Publisher publisher = publisherService.findById(id);
+        Publisher publisher = publisherService.findById(id);
 
         if (isEmpty(publisher)) {
             return ResponseEntity.notFound().build();

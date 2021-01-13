@@ -17,9 +17,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private  UserRepository userRepository;
+    private UserRepository userRepository;
 
-    @Transactional(readOnly = true)
     @Override
     public List<User> getAll() {
         return userRepository.findAll();
@@ -28,14 +27,14 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     @Override
     public User findById(Long id) {
-        Assert.notNull(id,"User id should not be null");
+        Assert.notNull(id, "User id should not be null");
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
     @Override
     public void delete(Long id) {
-        Assert.notNull(id,"User id should not be null");
+        Assert.notNull(id, "User id should not be null");
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
         userRepository.delete(user);
@@ -45,7 +44,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user) {
 
-        Assert.notNull(user,"User dto object should not be null");
+        Assert.notNull(user, "User dto object should not be null");
         return userRepository.save(user);
+
     }
 }

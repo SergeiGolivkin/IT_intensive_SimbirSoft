@@ -24,17 +24,16 @@ public class AuthorServiceImpl implements AuthorService {
         return authorRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
     @Override
     public Author findById(Long id) {
-        Assert.notNull(id,"Author id should not be null");
+        Assert.notNull(id, "Author id should not be null");
         return authorRepository.findById(id)
                 .orElseThrow(() -> new AuthorNotFoundException(id));
     }
 
     @Override
     public void delete(Long id) {
-        Assert.notNull(id,"Author id should not be null");
+        Assert.notNull(id, "Author id should not be null");
         Author author = authorRepository.findById(id)
                 .orElseThrow(() -> new AuthorNotFoundException(id));
         authorRepository.delete(author);
@@ -43,8 +42,8 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author save(Author author) {
-        Assert.notNull(author,"Author dto object should not be null");
-       return authorRepository.save(author);
+        Assert.notNull(author, "Author dto object should not be null");
+        return authorRepository.save(author);
 
     }
 }

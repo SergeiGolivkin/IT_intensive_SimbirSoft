@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-public interface UserController  {
+public interface UserController {
 
     String USER_ID_PATH_VARIABLE = "/{id}";
 

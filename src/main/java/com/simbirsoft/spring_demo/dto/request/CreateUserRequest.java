@@ -35,5 +35,4 @@ public class CreateUserRequest {
     @NotBlank(message = "{\"field\":\"status\", \"message\":\"Поле является обязательным\"}")
     private Status status;
 
-
 }

@@ -11,16 +11,18 @@ public enum Role {
             Permission.AUTHOR_WRITE, Permission.BOOK_WRITE, Permission.PUBLISHER_WRITE,
             Permission.USER_READ, Permission.USER_WRITE));
 
+
     private final Set<Permission> permissions;
 
     Role(Set<Permission> permissions) {
         this.permissions = permissions;
     }
-    public Set<Permission>getPermissions(){
+
+    public Set<Permission> getPermissions() {
         return permissions;
     }
 
-    public Set<SimpleGrantedAuthority> getAuthorities(){
+    public Set<SimpleGrantedAuthority> getAuthorities() {
         return getPermissions().stream()
                 .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
                 .collect(Collectors.toSet());

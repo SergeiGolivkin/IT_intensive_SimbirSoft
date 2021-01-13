@@ -43,7 +43,6 @@ public class BookControllerImpl implements BookController {
         Book book = bookService.findById(id);
 
 
-
         return ResponseEntity
                 .ok(bookMapper.toBookResponse(
                         bookService.findById(id)));

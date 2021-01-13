@@ -1,42 +1,49 @@
 package com.simbirsoft.spring_demo.service.impl;
 
-import com.simbirsoft.spring_demo.dto.PublisherDto;
-import com.simbirsoft.spring_demo.mapper.PublisherMapper;
+import com.simbirsoft.spring_demo.exception.PublisherNotFoundException;
 import com.simbirsoft.spring_demo.model.Publisher;
 import com.simbirsoft.spring_demo.repository.PublisherRepository;
 import com.simbirsoft.spring_demo.service.PublisherService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class PublisherServiceImpl implements PublisherService {
 
-    @Autowired
     private PublisherRepository publisherRepository;
 
-    @Autowired
-    private PublisherMapper publisherMapper;
-
+    @Transactional(readOnly = true)
     @Override
     public List<Publisher> getAll() {
         return publisherRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Publisher findById(Long id) {
-        return publisherRepository.findById(id).orElse(null);
+        Assert.notNull(id,"Publisher id should not be null");
+        return publisherRepository.findById(id)
+                .orElseThrow(() -> new PublisherNotFoundException(id));
     }
 
     @Override
     public void delete(Long id) {
-        publisherRepository.deleteById(id);
+        Assert.notNull(id,"Publisher id should not be null");
+        Publisher publisher = publisherRepository.findById(id)
+                .orElseThrow(() -> new PublisherNotFoundException(id));
+        publisherRepository.delete(publisher);
+
     }
 
     @Override
-    public void save(PublisherDto publisherDto) {
-        publisherRepository.save(publisherMapper.toPublisher(publisherDto));
+    public Publisher save(Publisher publisher) {
 
+        Assert.notNull(publisher,"Publisher dto object should not be null");
+        return publisherRepository.save(publisher);
     }
 }

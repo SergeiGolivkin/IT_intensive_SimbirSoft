@@ -1,48 +1,49 @@
 package com.simbirsoft.spring_demo.service.impl;
 
-import com.simbirsoft.spring_demo.dto.BookDto;
-import com.simbirsoft.spring_demo.mapper.BookMapper;
+import com.simbirsoft.spring_demo.exception.BookNotFoundException;
 import com.simbirsoft.spring_demo.model.Book;
 import com.simbirsoft.spring_demo.repository.BookRepository;
-import com.simbirsoft.spring_demo.service.AuthorService;
 import com.simbirsoft.spring_demo.service.BookService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
 
-
-    @Autowired
     private BookRepository bookRepository;
 
-    @Autowired
-    private AuthorService authorService;
-
-    @Autowired
-    private BookMapper bookMapper;
-
+    @Transactional(readOnly = true)
     @Override
     public List<Book> getAll() {
         return bookRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Book findById(Long id) {
-        return bookRepository.findById(id).orElse(null);
+        Assert.notNull(id,"Book id should not be null");
+        return bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundException(id));
     }
 
     @Override
     public void delete(Long id) {
-        bookRepository.deleteById(id);
+        Assert.notNull(id,"Book id should not be null");
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundException(id));
+        bookRepository.delete(book);
 
     }
 
     @Override
-    public void save(BookDto bookDto) {
-        bookRepository.save(bookMapper.toBook(bookDto));
+    public Book save(Book book) {
 
+        Assert.notNull(book,"Book dto object should not be null");
+        return bookRepository.save(book);
     }
 }

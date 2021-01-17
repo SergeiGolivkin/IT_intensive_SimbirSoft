@@ -1,75 +1,38 @@
 package com.simbirsoft.spring_demo.controller;
 
-import com.simbirsoft.spring_demo.dto.AuthorDto;
+import com.simbirsoft.spring_demo.dto.request.CreateAuthorRequest;
+import com.simbirsoft.spring_demo.dto.response.AuthorResponse;
 import com.simbirsoft.spring_demo.model.Author;
-import com.simbirsoft.spring_demo.service.AuthorService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
+import javax.validation.Valid;
 import java.util.List;
-import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
-@AllArgsConstructor
-@RestController
-@RequestMapping("/api/v1/author")
-@Api(value = "Author Service", description = "Author table")
-public class AuthorController {
 
-    private final AuthorService authorService;
+public interface AuthorController {
+
+    String AUTHOR_ID_PATH_VARIABLE = "/{id}";
+
 
     @GetMapping
     @PreAuthorize("hasAuthority('author:read')")
     @ApiOperation(value = "show all authors")
-    public ResponseEntity<List<Author>> getAll() {
-        return ResponseEntity.ok(authorService.getAll());
-    }
-
-
+    ResponseEntity<List<Author>> getAll();
+  
     @PreAuthorize("hasAnyAuthority('author:read')")
-    @GetMapping("/{id}")
+    @GetMapping(AUTHOR_ID_PATH_VARIABLE)
     @ApiOperation(value = "show author by ID")
-    public ResponseEntity<Author> findById(@PathVariable("id") Long id) {
-        if (isEmpty(id)) {
-            return ResponseEntity.badRequest().build();
-        }
-        Author author = authorService.findById(id);
-
-        if (isEmpty(author)) {
-            return ResponseEntity.noContent().build();
-        }
-
-        return ResponseEntity.ok(author);
-    }
-
+    ResponseEntity<AuthorResponse> findById(@PathVariable("id") Long id);
 
     @PreAuthorize("hasAnyAuthority('author:write')")
-    @PostMapping("/create")
+    @PostMapping
     @ApiOperation(value = "create a new author")
-    public ResponseEntity<String> addAuthor(@RequestBody AuthorDto authorDto) {
-        if (isEmpty(authorDto)) {
-            return ResponseEntity.badRequest().build();
-        }
-        authorService.save(authorDto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
+    ResponseEntity<AuthorResponse> createAuthor(@Valid @RequestBody CreateAuthorRequest createAuthorRequest);
 
     @PreAuthorize("hasAnyAuthority('author:write')")
-    @DeleteMapping("/{id}")
+    @DeleteMapping(AUTHOR_ID_PATH_VARIABLE)
     @ApiOperation(value = "delete author by ID")
-    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
-        Author author = authorService.findById(id);
-
-        if (isEmpty(author)) {
-            return ResponseEntity.notFound().build();
-        }
-        authorService.delete(id);
-        return ResponseEntity.ok().build();
-
-    }
+    ResponseEntity<String> delete(@PathVariable("id") Long id);
 }

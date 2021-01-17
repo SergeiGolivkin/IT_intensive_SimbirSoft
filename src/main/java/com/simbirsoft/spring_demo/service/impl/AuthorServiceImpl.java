@@ -1,33 +1,24 @@
 package com.simbirsoft.spring_demo.service.impl;
 
-import com.simbirsoft.spring_demo.dto.AuthorDto;
-import com.simbirsoft.spring_demo.mapper.AuthorMapper;
+
+import com.simbirsoft.spring_demo.exception.AuthorNotFoundException;
 import com.simbirsoft.spring_demo.model.Author;
 import com.simbirsoft.spring_demo.repository.AuthorRepository;
 import com.simbirsoft.spring_demo.service.AuthorService;
-import com.simbirsoft.spring_demo.service.PublisherService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import java.util.List;
 
+
 @Service
+@RequiredArgsConstructor
 public class AuthorServiceImpl implements AuthorService {
 
-    @Autowired
     private AuthorRepository authorRepository;
 
-    @Autowired
-    private  PublisherService publisherService;
-
-    @Autowired
-    private  AuthorMapper authorMapper;
-
-    @Override
-    public List<Author> getAll() {
-        return authorRepository.findAll();
-    }
-
+    @Transactional(readOnly = true)
     @Override
     public List<Author> getAll() {
         return authorRepository.findAll();
@@ -35,19 +26,24 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author findById(Long id) {
-        return authorRepository.findById(id).orElse(null);
+        Assert.notNull(id, "Author id should not be null");
+        return authorRepository.findById(id)
+                .orElseThrow(() -> new AuthorNotFoundException(id));
     }
 
     @Override
     public void delete(Long id) {
-        authorRepository.deleteById(id);
+        Assert.notNull(id, "Author id should not be null");
+        Author author = authorRepository.findById(id)
+                .orElseThrow(() -> new AuthorNotFoundException(id));
+        authorRepository.delete(author);
     }
 
 
     @Override
-    public void save(AuthorDto authorDto) {
-        authorRepository.save(authorMapper.toAuthor(authorDto));
-
+    public Author save(Author author) {
+        Assert.notNull(author, "Author dto object should not be null");
+        return authorRepository.save(author);
     }
 }
 

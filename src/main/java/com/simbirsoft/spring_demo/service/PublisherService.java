@@ -1,7 +1,6 @@
 package com.simbirsoft.spring_demo.service;
 
 
-import com.simbirsoft.spring_demo.dto.PublisherDto;
 import com.simbirsoft.spring_demo.model.Publisher;
 
 import java.util.List;
@@ -14,5 +13,5 @@ public interface PublisherService {
 
     void delete(Long id);
 
-    void save(PublisherDto publisherDto);
+    Publisher save(Publisher publisher);
 }

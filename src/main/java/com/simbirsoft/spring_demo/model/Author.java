@@ -1,8 +1,10 @@
 package com.simbirsoft.spring_demo.model;
 
 import lombok.Data;
-
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -23,4 +25,9 @@ public class Author {
     @Column(name = "last_name")
     private String lastName;
 
+    @CreationTimestamp
+    private LocalDateTime localDateTime;
+
+    @UpdateTimestamp
+    private LocalDateTime lastModifiedTime;
 }

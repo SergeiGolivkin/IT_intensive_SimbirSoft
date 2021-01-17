@@ -1,74 +1,39 @@
 package com.simbirsoft.spring_demo.controller;
 
-import com.simbirsoft.spring_demo.dto.BookDto;
+import com.simbirsoft.spring_demo.dto.request.CreateBookRequest;
+import com.simbirsoft.spring_demo.dto.response.BookResponse;
 import com.simbirsoft.spring_demo.model.Book;
-import com.simbirsoft.spring_demo.service.BookService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+import javax.validation.Valid;
 import java.util.List;
-import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
-@AllArgsConstructor
-@RestController
-@RequestMapping("/api/v1/book")
-@Api(value = "Book Service", description = "Book table")
-public class BookController {
+public interface BookController {
 
-    private final BookService bookService;
+    String BOOK_ID_PATH_VARIABLE = "/{id}";
 
     @GetMapping
     @PreAuthorize("hasAuthority('book:read')")
     @ApiOperation(value = "show all books")
-    public ResponseEntity<List<Book>> getAll() {
-        return ResponseEntity.ok(bookService.getAll());
-    }
+    ResponseEntity<List<Book>> getAll();
 
     @PreAuthorize("hasAnyAuthority('book:read')")
-    @GetMapping("/{id}")
+    @GetMapping(BOOK_ID_PATH_VARIABLE)
     @ApiOperation(value = "show book by ID")
-    public ResponseEntity<Book> findById(@PathVariable("id") Long id) {
-        if (isEmpty(id)) {
-            return ResponseEntity.badRequest().build();
-        }
-        Book book = bookService.findById(id);
-
-        if (isEmpty(book)) {
-            return ResponseEntity.noContent().build();
-        }
-
-        return ResponseEntity.ok(book);
-    }
+    ResponseEntity<BookResponse> findById(@PathVariable("id") Long id);
 
     @PreAuthorize("hasAnyAuthority('book:write')")
-    @PostMapping("/create")
+    @PostMapping
     @ApiOperation(value = "create a new book")
-    public ResponseEntity<String> addBook(@RequestBody BookDto bookDto) {
-        if (isEmpty(bookDto)) {
-            return ResponseEntity.badRequest().build();
-        }
-        bookService.save(bookDto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
+    ResponseEntity<BookResponse> createBook(@Valid @RequestBody CreateBookRequest createBookRequest);
 
     @PreAuthorize("hasAnyAuthority('book:write')")
-    @DeleteMapping("/{id}")
+    @DeleteMapping(BOOK_ID_PATH_VARIABLE)
     @ApiOperation(value = "delete book by ID")
-    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
-        Book book = bookService.findById(id);
-
-        if (isEmpty(book)) {
-            return ResponseEntity.notFound().build();
-        }
-        bookService.delete(id);
-        return ResponseEntity.ok().build();
-
-    }
+    ResponseEntity<String> delete(@PathVariable("id") Long id);
 
 }

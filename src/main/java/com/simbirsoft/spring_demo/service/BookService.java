@@ -1,7 +1,6 @@
 package com.simbirsoft.spring_demo.service;
 
 
-import com.simbirsoft.spring_demo.dto.BookDto;
 import com.simbirsoft.spring_demo.model.Book;
 
 import java.util.List;
@@ -14,5 +13,5 @@ public interface BookService {
 
     void delete(Long id);
 
-    void save(BookDto bookDto);
+    Book save(Book book);
 }
